@@ -12,6 +12,16 @@ import java.util.TreeSet;
 
 public class ManagerBehavior extends AbstractBehavior<ManagerBehavior.Command> {
 
+    private ManagerBehavior(ActorContext<Command> context) {
+        super(context);
+    }
+
+    public static Behavior<Command> create(){
+        return Behaviors.setup(ManagerBehavior::new);
+    }
+
+    private SortedSet<BigInteger> primes = new TreeSet<>();
+
     public interface Command extends Serializable{};
 
     public static class InstructionCommand implements Command{
@@ -40,16 +50,6 @@ public class ManagerBehavior extends AbstractBehavior<ManagerBehavior.Command> {
             return prime;
         }
     }
-
-    private ManagerBehavior(ActorContext<Command> context) {
-        super(context);
-    }
-
-    public static Behavior<Command> create(){
-        return Behaviors.setup(ManagerBehavior::new);
-    }
-
-    private SortedSet<BigInteger> primes = new TreeSet<>();
 
     @Override
     public Receive<Command> createReceive() {

@@ -11,8 +11,8 @@ public class Main {
 //    }
 
     public static void main(String[] args) {
-            ActorSystem<String> bigPrimes = ActorSystem.create(ManagerBehavior.create(), "BigPrimes");
-            bigPrimes.tell("start");
+            ActorSystem<ManagerBehavior.Command> bigPrimes = ActorSystem.create(ManagerBehavior.create(), "BigPrimes");
+            bigPrimes.tell(new ManagerBehavior.InstructionCommand("start"));
 
     }
 }
